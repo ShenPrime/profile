@@ -52,13 +52,10 @@ function validateContactForm(data: unknown): { valid: boolean; errors: string[];
 
 // POST /api/contact
 router.post('/', async (req: Request, res: Response) => {
-  console.log('[CONTACT] Received contact form submission');
-  
   try {
     // Validate input
     const validation = validateContactForm(req.body);
     if (!validation.valid || !validation.data) {
-      console.log('[CONTACT] Validation failed:', validation.errors);
       res.status(400).json({
         success: false,
         errors: validation.errors,
@@ -67,27 +64,22 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     const formData = validation.data;
-    console.log('[CONTACT] Form data validated for:', formData.email);
 
     // Save to database
-    const submission = await saveContactSubmission(formData);
-    console.log('[CONTACT] Saved to DB with ID:', submission.id);
+    await saveContactSubmission(formData);
 
     // Send email notification
-    console.log('[CONTACT] Sending email notification...');
     await sendContactNotification(formData);
-    console.log('[CONTACT] Email sent successfully');
 
     res.status(200).json({
       success: true,
       message: 'Thank you for your message! I\'ll get back to you soon.',
     });
   } catch (error) {
-    console.error('[CONTACT] Error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Contact form error:', error);
     res.status(500).json({
       success: false,
-      errors: [`Error: ${errorMessage}`],
+      errors: ['Something went wrong. Please try again later.'],
     });
   }
 });
