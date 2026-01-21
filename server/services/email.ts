@@ -9,7 +9,12 @@ const TO_EMAIL = process.env.TO_EMAIL || 'leoalshen@gmail.com';
 export async function sendContactNotification(formData: ContactFormData): Promise<void> {
   const { name, email, message } = formData;
 
-  console.log('Attempting to send email...', { from: FROM_EMAIL, to: TO_EMAIL });
+  console.log('[EMAIL] Attempting to send email...', { 
+    from: FROM_EMAIL, 
+    to: TO_EMAIL,
+    apiKeySet: !!process.env.RESEND_API_KEY,
+    apiKeyPrefix: process.env.RESEND_API_KEY?.substring(0, 6) 
+  });
   
   const { data, error } = await resend.emails.send({
     from: `Portfolio Contact <${FROM_EMAIL}>`,
@@ -59,9 +64,9 @@ This message was sent from your portfolio contact form at shen-dev.com
   });
 
   if (error) {
-    console.error('Resend API error:', error);
+    console.error('[EMAIL] Resend API error:', JSON.stringify(error, null, 2));
     throw new Error(`Failed to send email: ${error.message}`);
   }
 
-  console.log('Email sent successfully! ID:', data?.id)
+  console.log('[EMAIL] Email sent successfully! ID:', data?.id)
 }
