@@ -84,9 +84,10 @@ router.post('/', async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error('[CONTACT] Error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     res.status(500).json({
       success: false,
-      errors: ['Something went wrong. Please try again later.'],
+      errors: [`Error: ${errorMessage}`],
     });
   }
 });
