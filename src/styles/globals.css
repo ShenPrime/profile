@@ -40,10 +40,12 @@
 /* Base styles */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   @apply bg-tokyo-bg text-tokyo-fg transition-colors duration-300;
+  overflow-x: hidden;
 }
 
 /* Light mode overrides */

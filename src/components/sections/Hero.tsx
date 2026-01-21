@@ -13,7 +13,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-7xl md:text-9xl font-bold animated-gradient-text"
+          className="text-5xl sm:text-7xl md:text-9xl font-bold animated-gradient-text"
         >
           Shen
         </motion.h1>

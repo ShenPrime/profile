@@ -28,8 +28,8 @@ export function About() {
               </div>
             </div>
             {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-tokyo-primary/10 rounded-full blur-2xl" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-tokyo-secondary/10 rounded-full blur-2xl" />
+            <div className="hidden sm:block absolute -top-4 -right-4 w-24 h-24 bg-tokyo-primary/10 rounded-full blur-2xl" />
+            <div className="hidden sm:block absolute -bottom-4 -left-4 w-32 h-32 bg-tokyo-secondary/10 rounded-full blur-2xl" />
           </motion.div>
 
           {/* Bio content */}

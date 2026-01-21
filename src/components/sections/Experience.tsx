@@ -14,7 +14,7 @@ export function Experience() {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-tokyo-primary via-tokyo-secondary to-tokyo-accent [html.light_&]:from-tokyo-light-primary [html.light_&]:via-tokyo-light-secondary [html.light_&]:to-tokyo-light-accent transform md:-translate-x-1/2" />
+          <div className="absolute left-2 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-tokyo-primary via-tokyo-secondary to-tokyo-accent [html.light_&]:from-tokyo-light-primary [html.light_&]:via-tokyo-light-secondary [html.light_&]:to-tokyo-light-accent md:-translate-x-1/2" />
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -23,15 +23,15 @@ export function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`relative pl-8 md:pl-0 pb-12 last:pb-0 ${
-                index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2 md:ml-auto'
+              className={`relative pl-10 md:pl-0 pb-12 last:pb-0 ${
+                index % 2 === 0 ? 'md:w-1/2 md:pr-8 md:text-right' : 'md:w-1/2 md:pl-8 md:ml-auto'
               }`}
             >
               {/* Timeline dot */}
-              <div className={`absolute left-0 md:left-1/2 top-0 w-4 h-4 rounded-full bg-tokyo-primary [html.light_&]:bg-tokyo-light-primary border-4 border-tokyo-bg [html.light_&]:border-tokyo-light-bg transform -translate-x-1/2 md:-translate-x-1/2 z-10`} />
+              <div className="absolute left-0 md:left-1/2 top-0 w-4 h-4 rounded-full bg-tokyo-primary [html.light_&]:bg-tokyo-light-primary border-4 border-tokyo-bg [html.light_&]:border-tokyo-light-bg md:-translate-x-1/2 z-10" />
 
               {/* Content card */}
-              <div className={`md:w-[calc(50%-2rem)] ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
+              <div className="w-full">
                 <div className="bg-tokyo-subtle/50 [html.light_&]:bg-tokyo-light-subtle/50 rounded-xl p-6 border border-tokyo-border/50 [html.light_&]:border-tokyo-light-border/50 hover:border-tokyo-primary/30 [html.light_&]:hover:border-tokyo-light-primary/30 transition-colors">
                   {/* Date badge */}
                   <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tokyo-primary/10 [html.light_&]:bg-tokyo-light-primary/10 text-tokyo-primary [html.light_&]:text-tokyo-light-primary text-xs mb-3 ${index % 2 === 0 ? 'md:float-right md:ml-4' : ''}`}>
