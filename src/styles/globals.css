@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* Tokyo Night Theme Custom Properties */
+@theme {
+  /* Dark mode colors (default) */
+  --color-tokyo-bg: #1a1b26;
+  --color-tokyo-bg-dark: #16161e;
+  --color-tokyo-bg-highlight: #292e42;
+  --color-tokyo-fg: #a9b1d6;
+  --color-tokyo-fg-dark: #565f89;
+  --color-tokyo-primary: #7aa2f7;
+  --color-tokyo-secondary: #bb9af7;
+  --color-tokyo-accent: #7dcfff;
+  --color-tokyo-accent-alt: #9ece6a;
+  --color-tokyo-subtle: #24283b;
+  --color-tokyo-muted: #565f89;
+  --color-tokyo-border: #3b4261;
+  --color-tokyo-red: #f7768e;
+  --color-tokyo-orange: #ff9e64;
+  --color-tokyo-yellow: #e0af68;
+
+  /* Light mode colors */
+  --color-tokyo-light-bg: #d5d6db;
+  --color-tokyo-light-bg-dark: #cbccd1;
+  --color-tokyo-light-bg-highlight: #c8c9ce;
+  --color-tokyo-light-fg: #343b58;
+  --color-tokyo-light-fg-dark: #6172b0;
+  --color-tokyo-light-primary: #34548a;
+  --color-tokyo-light-secondary: #5a4a78;
+  --color-tokyo-light-accent: #166775;
+  --color-tokyo-light-accent-alt: #485e30;
+  --color-tokyo-light-subtle: #c8c9ce;
+  --color-tokyo-light-muted: #6172b0;
+  --color-tokyo-light-border: #b4b5b9;
+  --color-tokyo-light-red: #8c4351;
+  --color-tokyo-light-orange: #965027;
+  --color-tokyo-light-yellow: #8f5e15;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-tokyo-bg text-tokyo-fg transition-colors duration-300;
+}
+
+/* Light mode overrides */
+html.light body {
+  @apply bg-tokyo-light-bg text-tokyo-light-fg;
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-tokyo-primary/30 text-tokyo-fg;
+}
+
+html.light ::selection {
+  @apply bg-tokyo-light-primary/30 text-tokyo-light-fg;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-tokyo-bg-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-tokyo-border rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-tokyo-muted;
+}
+
+html.light ::-webkit-scrollbar-track {
+  @apply bg-tokyo-light-bg-dark;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  @apply bg-tokyo-light-border;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  @apply bg-tokyo-light-muted;
+}
+
+/* Focus styles */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-tokyo-primary;
+}
+
+html.light *:focus-visible {
+  @apply outline-tokyo-light-primary;
+}
+
+/* Animated gradient text */
+.animated-gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-tokyo-primary),
+    var(--color-tokyo-secondary),
+    var(--color-tokyo-accent),
+    var(--color-tokyo-primary)
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+html.light .animated-gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-tokyo-light-primary),
+    var(--color-tokyo-light-secondary),
+    var(--color-tokyo-light-accent),
+    var(--color-tokyo-light-primary)
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
