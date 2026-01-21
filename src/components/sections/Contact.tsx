@@ -7,14 +7,14 @@ import { EmailIcon, GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/i
 const contactInfo = [
   {
     label: 'Email',
-    value: 'hello@example.com',
-    href: 'mailto:hello@example.com',
+    value: 'hello@shen-dev.com',
+    href: 'mailto:hello@shen-dev.com',
     icon: <EmailIcon />,
   },
   {
     label: 'GitHub',
-    value: 'github.com/shen',
-    href: 'https://github.com',
+    value: 'github.com/ShenPrime',
+    href: 'https://github.com/ShenPrime',
     icon: <GitHubIcon />,
   },
   {
@@ -38,21 +38,50 @@ export function Contact() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Message sent successfully!',
+        });
+        setFormData({ name: '', email: '', message: '' });
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.errors?.[0] || 'Something went wrong. Please try again.',
+        });
+      }
+    } catch {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -169,7 +198,7 @@ export function Contact() {
                 />
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="space-y-4">
                 <Button
                   type="submit"
                   size="lg"
@@ -179,13 +208,17 @@ export function Contact() {
                   Send Message
                 </Button>
                 
-                {isSubmitted && (
+                {submitStatus && (
                   <motion.p
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-tokyo-accent-alt [html.light_&]:text-tokyo-light-accent-alt text-sm"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`text-sm ${
+                      submitStatus.type === 'success'
+                        ? 'text-tokyo-accent-alt [html.light_&]:text-tokyo-light-accent-alt'
+                        : 'text-tokyo-red [html.light_&]:text-tokyo-light-red'
+                    }`}
                   >
-                    Message sent successfully!
+                    {submitStatus.message}
                   </motion.p>
                 )}
               </div>
