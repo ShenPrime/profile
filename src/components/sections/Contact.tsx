@@ -98,7 +98,7 @@ export function Contact() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             className="space-y-6"
           >
             <p className="text-tokyo-muted [html.light_&]:text-tokyo-light-muted leading-relaxed">
@@ -117,7 +117,7 @@ export function Contact() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.3 }}
                   className="flex items-center gap-4 p-4 rounded-lg bg-tokyo-subtle/50 [html.light_&]:bg-tokyo-light-subtle/50 border border-tokyo-border/50 [html.light_&]:border-tokyo-light-border/50 hover:border-tokyo-primary/50 [html.light_&]:hover:border-tokyo-light-primary/50 transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-lg bg-tokyo-bg-highlight [html.light_&]:bg-tokyo-light-bg-highlight flex items-center justify-center text-tokyo-primary [html.light_&]:text-tokyo-light-primary group-hover:scale-110 transition-transform">
@@ -141,7 +141,7 @@ export function Contact() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>

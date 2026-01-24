@@ -10,6 +10,7 @@ interface Particle {
   layer: number; // 1 = near, 2 = mid, 3 = far
   color: string;
   opacity: number;
+  baseOpacity: number; // Original opacity before theme adjustments
   driftVx: number; // Drift velocity X (pixels per second)
   driftVy: number; // Drift velocity Y (pixels per second)
 }
@@ -36,18 +37,22 @@ const PARALLAX_STRENGTH = {
   3: 5,  // far - moves least
 };
 
-// Color palettes
+// Color palettes (Tokyo Night theme)
 const DARK_COLORS = ['#7aa2f7', '#bb9af7', '#7dcfff'];
-const LIGHT_COLORS = ['#34548a', '#5a4a78', '#166775'];
+const LIGHT_COLORS = ['#2959aa', '#7b43ba', '#006c86'];
 
 // Line colors
 const DARK_LINE_COLOR = 'rgba(122, 162, 247, 0.1)';
-const LIGHT_LINE_COLOR = 'rgba(52, 84, 138, 0.12)';
+const LIGHT_LINE_COLOR = 'rgba(41, 89, 170, 0.25)';
+
+// Opacity multiplier for light mode (particles need more opacity on light backgrounds)
+const LIGHT_OPACITY_MULTIPLIER = 1.5;
 
 function createParticles(
   width: number,
   height: number,
-  colors: string[]
+  colors: string[],
+  isLightMode: boolean = false
 ): Particle[] {
   const particles: Particle[] = [];
 
@@ -86,6 +91,10 @@ function createParticles(
     const layerMultiplier = DRIFT_SPEED_BY_LAYER[layer as keyof typeof DRIFT_SPEED_BY_LAYER];
     const speed = baseSpeed * layerMultiplier;
 
+    const baseOpacity = opacityByLayer[layer as keyof typeof opacityByLayer];
+    const opacity = isLightMode 
+      ? Math.min(baseOpacity * LIGHT_OPACITY_MULTIPLIER, 1) 
+      : baseOpacity;
     particles.push({
       x,
       y,
@@ -94,7 +103,8 @@ function createParticles(
       size: sizeByLayer[layer as keyof typeof sizeByLayer],
       layer,
       color: colors[Math.floor(Math.random() * colors.length)],
-      opacity: opacityByLayer[layer as keyof typeof opacityByLayer],
+      opacity,
+      baseOpacity,
       driftVx: Math.cos(driftAngle) * speed,
       driftVy: Math.sin(driftAngle) * speed,
     });
@@ -120,11 +130,16 @@ export function ParallaxParticles() {
     return resolvedTheme === 'dark' ? DARK_LINE_COLOR : LIGHT_LINE_COLOR;
   }, [resolvedTheme]);
 
-  // Update particle colors when theme changes
+  // Update particle colors and opacity when theme changes
   useEffect(() => {
     const colors = getColors();
+    const isLight = resolvedTheme === 'light';
     particlesRef.current.forEach((p) => {
       p.color = colors[Math.floor(Math.random() * colors.length)];
+      // Boost opacity in light mode for better visibility
+      p.opacity = isLight 
+        ? Math.min(p.baseOpacity * LIGHT_OPACITY_MULTIPLIER, 1) 
+        : p.baseOpacity;
     });
   }, [resolvedTheme, getColors]);
 
@@ -152,7 +167,8 @@ export function ParallaxParticles() {
       particlesRef.current = createParticles(
         window.innerWidth,
         window.innerHeight,
-        getColors()
+        getColors(),
+        resolvedTheme === 'light'
       );
 
       // Update mobile check
@@ -263,7 +279,7 @@ export function ParallaxParticles() {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationRef.current);
     };
-  }, [getColors, getLineColor]);
+  }, [getColors, getLineColor, resolvedTheme]);
 
   return (
     <canvas

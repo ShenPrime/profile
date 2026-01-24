@@ -11,8 +11,9 @@ export function Hero() {
         {/* Animated gradient name */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
+          viewport={{ once: false, amount: 0.3 }}
           className="text-5xl sm:text-7xl md:text-9xl font-bold animated-gradient-text"
         >
           Shen
@@ -21,8 +22,9 @@ export function Hero() {
         {/* Subtitle */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          viewport={{ once: false, amount: 0.3 }}
           className="mt-8 text-center"
         >
           <p className="text-lg md:text-xl text-tokyo-muted [html.light_&]:text-tokyo-light-muted mb-4">
@@ -37,8 +39,9 @@ export function Hero() {
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+        viewport={{ once: false, amount: 0.3 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.a

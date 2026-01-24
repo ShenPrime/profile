@@ -1,37 +1,42 @@
 @import "tailwindcss";
 
+/* Inter font */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 /* Tokyo Night Theme Custom Properties */
 @theme {
-  /* Dark mode colors (default) */
+  /* Dark mode colors (default) - Tokyo Night Storm */
   --color-tokyo-bg: #1a1b26;
   --color-tokyo-bg-dark: #16161e;
   --color-tokyo-bg-highlight: #292e42;
-  --color-tokyo-fg: #a9b1d6;
-  --color-tokyo-fg-dark: #565f89;
+  --color-tokyo-fg: #c0caf5;
+  --color-tokyo-fg-dark: #a9b1d6;
   --color-tokyo-primary: #7aa2f7;
   --color-tokyo-secondary: #bb9af7;
   --color-tokyo-accent: #7dcfff;
   --color-tokyo-accent-alt: #9ece6a;
   --color-tokyo-subtle: #24283b;
-  --color-tokyo-muted: #565f89;
+  --color-tokyo-muted: #737aa2;
   --color-tokyo-border: #3b4261;
   --color-tokyo-red: #f7768e;
   --color-tokyo-orange: #ff9e64;
   --color-tokyo-yellow: #e0af68;
 
-  /* Light mode colors */
-  --color-tokyo-light-bg: #d5d6db;
-  --color-tokyo-light-bg-dark: #cbccd1;
-  --color-tokyo-light-bg-highlight: #c8c9ce;
+  /* Light mode colors (Tokyo Night Day - official palette) */
+  --color-tokyo-light-bg: #e6e7ed;
+  --color-tokyo-light-bg-dark: #d6d8df;
+  --color-tokyo-light-bg-highlight: #dcdee3;
   --color-tokyo-light-fg: #343b58;
-  --color-tokyo-light-fg-dark: #6172b0;
-  --color-tokyo-light-primary: #34548a;
-  --color-tokyo-light-secondary: #5a4a78;
-  --color-tokyo-light-accent: #166775;
-  --color-tokyo-light-accent-alt: #485e30;
-  --color-tokyo-light-subtle: #c8c9ce;
-  --color-tokyo-light-muted: #6172b0;
-  --color-tokyo-light-border: #b4b5b9;
+  --color-tokyo-light-fg-dark: #363c4d;
+  --color-tokyo-light-primary: #2959aa;
+  --color-tokyo-light-secondary: #7b43ba;
+  --color-tokyo-light-accent: #006c86;
+  --color-tokyo-light-accent-alt: #33635c;
+  --color-tokyo-light-subtle: #dcdee3;
+  --color-tokyo-light-muted: #707280;
+  --color-tokyo-light-border: #c1c2c7;
   --color-tokyo-light-red: #8c4351;
   --color-tokyo-light-orange: #965027;
   --color-tokyo-light-yellow: #8f5e15;

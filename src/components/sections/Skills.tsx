@@ -18,7 +18,7 @@ export function Skills() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               className="bg-tokyo-subtle/50 [html.light_&]:bg-tokyo-light-subtle/50 rounded-xl p-6 border border-tokyo-border/50 [html.light_&]:border-tokyo-light-border/50"
             >
               <h3 className="text-lg font-semibold text-tokyo-primary [html.light_&]:text-tokyo-light-primary mb-6">
@@ -32,7 +32,7 @@ export function Skills() {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.3 }}
                     className="group"
                   >
                     <div className="flex items-center justify-between mb-1.5">
@@ -50,7 +50,7 @@ export function Skills() {
                         initial={{ width: 0 }}
                         whileInView={{ width: `${(skill.level || 3) * 20}%` }}
                         transition={{ duration: 0.8, delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false, amount: 0.3 }}
                         className="h-full bg-gradient-to-r from-tokyo-primary to-tokyo-secondary [html.light_&]:from-tokyo-light-primary [html.light_&]:to-tokyo-light-secondary rounded-full"
                       />
                     </div>
@@ -66,7 +66,7 @@ export function Skills() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           className="mt-12 text-center"
         >
           <p className="text-sm text-tokyo-muted [html.light_&]:text-tokyo-light-muted mb-4">

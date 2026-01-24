@@ -24,7 +24,7 @@ export function Projects() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
             >
               <Card variant="gradient" className="h-full flex flex-col">
                 {/* Project image placeholder */}
@@ -99,7 +99,7 @@ export function Projects() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.3 }}
                 >
                   <div className="p-4 rounded-lg bg-tokyo-subtle/50 [html.light_&]:bg-tokyo-light-subtle/50 border border-tokyo-border/50 [html.light_&]:border-tokyo-light-border/50 hover:border-tokyo-primary/50 [html.light_&]:hover:border-tokyo-light-primary/50 transition-colors group">
                     <div className="flex items-start justify-between mb-2">

@@ -16,7 +16,7 @@ export function About() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             className="relative"
           >
             <div className="aspect-square max-w-sm mx-auto rounded-2xl bg-gradient-to-br from-tokyo-primary/20 to-tokyo-secondary/20 [html.light_&]:from-tokyo-light-primary/20 [html.light_&]:to-tokyo-light-secondary/20 p-1">
@@ -37,7 +37,7 @@ export function About() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             className="space-y-6"
           >
             <p className="text-lg text-tokyo-fg [html.light_&]:text-tokyo-light-fg leading-relaxed">
@@ -70,7 +70,7 @@ export function About() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.3 }}
                   className="text-center"
                 >
                   <div className="text-2xl md:text-3xl font-bold text-tokyo-primary [html.light_&]:text-tokyo-light-primary">
