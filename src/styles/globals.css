@@ -67,33 +67,30 @@ html.light ::selection {
   @apply bg-tokyo-light-primary/30 text-tokyo-light-fg;
 }
 
-/* Scrollbar styling */
+/* Hide scrollbar */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  display: none; /* Chrome/Safari/Opera */
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-tokyo-bg-dark;
+/* Custom cursors - Tokyo Night themed */
+* {
+  cursor: url('/cursors/default.svg') 4 2, auto;
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-tokyo-border rounded-full;
+a, button, [role="button"], input[type="submit"], input[type="button"],
+label[for], select, .cursor-pointer {
+  cursor: url('/cursors/pointer.svg') 10 2, pointer;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-tokyo-muted;
-}
-
-html.light ::-webkit-scrollbar-track {
-  @apply bg-tokyo-light-bg-dark;
-}
-
-html.light ::-webkit-scrollbar-thumb {
-  @apply bg-tokyo-light-border;
-}
-
-html.light ::-webkit-scrollbar-thumb:hover {
-  @apply bg-tokyo-light-muted;
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], input[type="tel"], input[type="url"],
+textarea, [contenteditable="true"] {
+  cursor: url('/cursors/text.svg') 12 12, text;
 }
 
 /* Focus styles */
