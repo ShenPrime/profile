@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { SectionWrapper, SectionTitle } from '@/components/ui/SectionWrapper';
 import { Button } from '@/components/ui/Button';
-import { EmailIcon, GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/icons';
+import { EmailIcon, GitHubIcon } from '@/components/icons';
 
 const contactInfo = [
   {
@@ -16,18 +16,6 @@ const contactInfo = [
     value: 'github.com/ShenPrime',
     href: 'https://github.com/ShenPrime',
     icon: <GitHubIcon />,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/shen',
-    href: 'https://linkedin.com',
-    icon: <LinkedInIcon />,
-  },
-  {
-    label: 'Twitter',
-    value: '@shen',
-    href: 'https://twitter.com',
-    icon: <TwitterIcon />,
   },
 ];
 

@@ -1,25 +1,15 @@
 import { motion } from 'framer-motion';
-import { GitHubIcon, LinkedInIcon, TwitterIcon, EmailIcon } from '@/components/icons';
+import { GitHubIcon, EmailIcon } from '@/components/icons';
 
 const socialLinks = [
   {
     name: 'GitHub',
-    href: 'https://github.com',
+    href: 'https://github.com/ShenPrime',
     icon: <GitHubIcon />,
   },
   {
-    name: 'LinkedIn',
-    href: 'https://linkedin.com',
-    icon: <LinkedInIcon />,
-  },
-  {
-    name: 'Twitter',
-    href: 'https://twitter.com',
-    icon: <TwitterIcon />,
-  },
-  {
     name: 'Email',
-    href: 'mailto:hello@example.com',
+    href: 'mailto:hello@shen-dev.com',
     icon: <EmailIcon />,
   },
 ];
