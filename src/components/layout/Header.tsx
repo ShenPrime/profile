@@ -13,6 +13,7 @@ const navLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,52 @@ export function Header() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Track active section with Intersection Observer
+  useEffect(() => {
+    const sectionIds = navLinks.map(link => link.href.replace('#', ''));
+    const observers: IntersectionObserver[] = [];
+
+    // Observe the hero section to clear active state when at top
+    const heroElement = document.querySelector('section');
+    if (heroElement && !heroElement.id) {
+      const heroObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setActiveSection('');
+            }
+          });
+        },
+        { rootMargin: '-20% 0px -80% 0px' }
+      );
+      heroObserver.observe(heroElement);
+      observers.push(heroObserver);
+    }
+
+    sectionIds.forEach(id => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setActiveSection(`#${id}`);
+            }
+          });
+        },
+        { rootMargin: '-40% 0px -60% 0px' }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
   }, []);
 
   return (
@@ -48,17 +95,31 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm text-tokyo-muted hover:text-tokyo-fg [html.light_&]:text-tokyo-light-muted [html.light_&]:hover:text-tokyo-light-fg transition-colors duration-200 rounded-lg hover:bg-tokyo-subtle/50 [html.light_&]:hover:bg-tokyo-light-subtle/50"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-4 py-2 text-sm transition-colors duration-200 rounded-lg hover:bg-tokyo-subtle/50 [html.light_&]:hover:bg-tokyo-light-subtle/50 ${
+                    isActive
+                      ? 'text-tokyo-primary [html.light_&]:text-tokyo-light-primary'
+                      : 'text-tokyo-muted hover:text-tokyo-primary [html.light_&]:text-tokyo-light-muted [html.light_&]:hover:text-tokyo-light-primary'
+                  }`}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 0 }}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeSection"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-tokyo-primary [html.light_&]:bg-tokyo-light-primary rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </motion.a>
+              );
+            })}
             <div className="ml-4">
               <ThemeToggle />
             </div>
@@ -99,19 +160,26 @@ export function Header() {
               className="md:hidden overflow-hidden"
             >
               <div className="py-4 space-y-1">
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3 text-tokyo-muted hover:text-tokyo-fg [html.light_&]:text-tokyo-light-muted [html.light_&]:hover:text-tokyo-light-fg hover:bg-tokyo-subtle/50 [html.light_&]:hover:bg-tokyo-light-subtle/50 rounded-lg transition-colors duration-200"
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
+                {navLinks.map((link, index) => {
+                  const isActive = activeSection === link.href;
+                  return (
+                    <motion.a
+                      key={link.href}
+                      href={link.href}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block px-4 py-3 rounded-lg transition-colors duration-200 ${
+                        isActive
+                          ? 'text-tokyo-primary [html.light_&]:text-tokyo-light-primary bg-tokyo-subtle/50 [html.light_&]:bg-tokyo-light-subtle/50 border-l-2 border-tokyo-primary [html.light_&]:border-tokyo-light-primary'
+                          : 'text-tokyo-muted hover:text-tokyo-primary [html.light_&]:text-tokyo-light-muted [html.light_&]:hover:text-tokyo-light-primary hover:bg-tokyo-subtle/50 [html.light_&]:hover:bg-tokyo-light-subtle/50'
+                      }`}
+                    >
+                      {link.label}
+                    </motion.a>
+                  );
+                })}
               </div>
             </motion.div>
           )}
