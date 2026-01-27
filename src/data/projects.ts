@@ -12,6 +12,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'coral-island-tracker',
+    title: 'Coral Island Tracker',
+    description:
+      'A web-based progress tracker for Coral Island. Track fish, crops, NPCs, and more across different playthroughs.',
+    tags: ['React', 'TypeScript', 'Bun', 'PostgreSQL'],
+    liveUrl: 'https://coral-island-tracker.up.railway.app/',
+    repoUrl: 'https://github.com/ShenPrime/coral-island-tracker',
+    featured: true,
+  },
+  {
     id: 'circleshoot',
     title: 'Circleshoot',
     description: 'A fast-paced horde shooter game where you survive waves of enemies.',
